@@ -23,7 +23,7 @@ func (c CustomersController) Get() revel.Result  {
 	for i ,customers := range customer {
 		app.Db.First(&customer[i].Balance , customers.ID)
 	}
-	return c.RenderText("shire" , customer)
+	return c.RenderJson( util.ResponseSuccess(customer))
 }
 func (c CustomersController) Find() revel.Result  {
 	var customer models.Customer
