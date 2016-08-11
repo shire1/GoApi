@@ -1,0 +1,34 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+#################User###########################
+POST     /user/create                                     UsersController.Create
+GET      /user/findAll                                    UsersController.FindAll
+GET      /user/find/:id                                   UsersController.Find
+POST     /user/login                                      UsersController.Login
+POST     /user/update/:id                                 UsersController.Update
+POST     /user/delete/:id                                 UsersController.Delete
+#################Customer###########################
+POST    /customer/create                                 CustomersController.Create
+GET     /customer                                        CustomersController.Get
+GET     /customer/:id                                    CustomersController.Find
+POST    /customer/update/:id                             CustomersController.Update
+GET    /customer/delete/:id                              CustomersController.Delete
+#################Money###########################
+POST    /money/create                                    MoneyController.Create
+GET     /money                                           MoneyController.Get
+GET     /money/:id                                       MoneyController.Find
+POST    /money/update/:id                                MoneyController.Update
+POST    /money/delete/:id                                MoneyController.Delete
+#################Transaction###########################
+POST    /transaction/create                              TransactionController.Create
+GET     /transaction/user/:id                            TransactionController.FindUser
+GET     /transaction/:id                                 TransactionController.Find
+POST    /transaction/delete/:id                          TransactionController.Delete
+#################Branches###########################
+POST    /branch/create                              BranchController.Create
+GET     /branch                                     BranchController.Get
+GET     /branch/:id                                 BranchController.Find
+POST    /branch/update/:id                          BranchController.Update
+POST    /branch/delete/:id                          BranchController.Delete
