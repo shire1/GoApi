@@ -3,7 +3,6 @@ import (
 	"github.com/revel/revel"
 	"github.com/dgrijalva/jwt-go"
 	"fmt"
-	"time"
 	"strconv"
 	"github.com/shireAli/GoApi/app/util"
 )
@@ -28,10 +27,6 @@ func (c JwtAuth) CheckToken() revel.Result  {
 	if err == nil {
 		if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 
-			var expireDate = time.Unix(int64(claims["exp"].(float64)),0)
-			if expireDate.Before(time.Now()) {
-				return c.RenderJson(util.ResponseError("expire Token"))
-			}
 			c.Session["email"] = claims["email"].(string);
 			c.Session["id"] = strconv.Itoa(int(claims["id"].(float64)));
 			return nil
