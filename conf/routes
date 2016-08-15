@@ -15,6 +15,7 @@ GET     /customer                                        CustomersController.Get
 GET     /customer/:id                                    CustomersController.Find
 POST    /customer/update/:id                             CustomersController.Update
 GET    /customer/delete/:id                              CustomersController.Delete
+GET    /customer/AndroidDelete/:id                       CustomersController.AndroidDelete
 #################Money###########################
 POST    /money/create                                    MoneyController.Create
 GET     /money                                           MoneyController.Get

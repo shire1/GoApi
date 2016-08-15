@@ -34,6 +34,8 @@ func (c CustomersController) Find() revel.Result  {
 		return c.RenderJson(util.ResponseError("Customer can't find"))
 	}
 
+		app.Db.First(&customer.Balance , customer.ID)
+
 	return c.RenderJson(util.ResponseSuccess(customer))
 }
 
@@ -73,13 +75,13 @@ func (c CustomersController) Update() revel.Result  {
 }
 
 
-func (c CustomersController) Delete() revel.Result  {
+func (c CustomersController) Delete() revel.Result {
 
 	var (
 		id string
 		customer models.Customer
 	)
-	c.Params.Bind(&id , "id")
+	c.Params.Bind(&id, "id")
 	customer.AccNo = id
 	if err := app.Db.Where(&customer).First(&customer).Delete(customer).Error; err != nil {
 		log.Println(err)
@@ -96,6 +98,34 @@ func (c CustomersController) Delete() revel.Result  {
 	if err := app.Db.Where(&transactions).Find(&transactions).Delete(transactions).Error; err != nil {
 		log.Println(err)
 		return c.RenderJson(util.ResponseError(" there is an error in many deleting "))
+	}
+	return c.RenderJson(util.ResponseSuccess(customer))
+
+}
+
+
+func (c CustomersController) AndroidDelete() revel.Result  {
+
+	var (
+		id string
+		customer models.Customer
+	)
+	c.Params.Bind(&id , "id")
+	if err := app.Db.Where(&customer ,id).First(&customer).Delete(customer).Error; err != nil {
+		log.Println(err)
+		return c.RenderJson(util.ResponseError("cusotmer finding failed "))
+	}
+	var money models.Money
+	money.AccNo = customer.AccNo
+	if err := app.Db.Where(&money).First(&money).Delete(money).Error; err != nil {
+		log.Println(err)
+		return c.RenderJson(util.ResponseError(" there is an error in many deleting "))
+	}
+	var transactions models.Transaction
+	transactions.AccNo = customer.AccNo
+	if err := app.Db.Where(&transactions).Find(&transactions).Delete(transactions).Error; err != nil {
+		log.Println(err)
+		return c.RenderJson(util.ResponseError(" there is an error in Trasaction deleting "))
 	}
 	return c.RenderJson(util.ResponseSuccess(customer))
 }
